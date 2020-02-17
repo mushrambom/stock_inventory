@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="button-group">
+        <a href="{% url 'display_carros' %}" class="btn btn-primary btn-md" roles="button">Carros</a>
+        <a href="{% url 'add_carro' %}" class="btn btn-warning btn-sm" roles="button">+</a>
+
+        <a href="{% url 'display_bonecas' %}" class="btn btn-primary btn-md" roles="button">Bonecas</a>
+        <a href="{% url 'add_boneca' %}" class="btn btn-warning btn-sm" roles="button">+</a>
+
+        <a href="{% url 'display_bonecos' %}" class="btn btn-primary btn-md" roles="button">Bonecos</a>
+        <a href="{% url 'add_boneco' %}" class="btn btn-warning btn-sm" roles="button">+</a>
+
+        <a href="{% url 'display_brindes' %}" class="btn btn-primary btn-md" roles="button">Brindes</a>
+        <a href="{% url 'add_brinde' %}" class="btn btn-warning btn-sm" roles="button">+</a>
+
+        <a href="{% url 'display_jogos' %}" class="btn btn-primary btn-md" roles="button">Jogos</a>
+        <a href="{% url 'add_jogo' %}" class="btn btn-warning btn-sm" roles="button">+</a>
+
+        <a href="{% url 'display_outros' %}" class="btn btn-primary btn-md" roles="button">Outros</a>
+        <a href="{% url 'add_outro' %}" class="btn btn-warning btn-sm" roles="button">+</a>
+    </div>
+    <br>
+    <h4> Atualmente vendo: {{ header }}</h4>
+    <br>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Status</th>
+                <th>Problemas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        {{ item.pk }}
+                    </td>
+                    <td>
+                        {{ item.nome }}
+                    </td>
+                    <td> {{ item.price }} </td>
+                    <td> {{ item.amount }} </td>
+                    <td> {{ item.status }} </td>
+                    <td> {{ item.issues }}</td>
+                    {% if header == "Bonecas" %}
+                    <td>
+                        <a href="{% url 'edit_boneca' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                    </td>
+                    {% elif header == "Bonecos" %}
+                    <td>
+                        <a href="#" class="btn btn-warning btn-sm" role="button">Edit</a>
+                    </td>
+                    {% endif %}
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
